@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_home_title"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#8866ff00"
+        android:gravity="center"
+        android:textSize="24sp"
+        android:text="主界面"/>
+
+    <yyg.buaa.com.yygsafe.ui.FocusedTextView
+        android:focusableInTouchMode="true"
+        android:ellipsize="marquee"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:textSize="15sp"
+        android:text="我是元光卫士，贴心护卫您的安全,为您保驾护航，从此安全无忧"/>
+
+    <GridView
+        android:background="@android:color/transparent"
+        android:id="@+id/grid_home"
+        android:numColumns="3"
+        android:verticalSpacing="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>

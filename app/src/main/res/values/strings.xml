@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">yygSafe</string>
+    <string name="sample_device_admin_description">必须开启超级管理员</string>
+    <string name="sample_device_admin">手机小管家</string>
+</resources>

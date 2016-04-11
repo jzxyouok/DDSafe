@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <TextView
+        style="@style/textview_title_style"
+        android:text="4、开启防盗保护"/>
+    
+    <CheckBox
+        android:id="@+id/cb_setup4_checklock"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="您没有开启防盗保护"/>
+
+
+    <TextView
+        android:id="@+id/tv_setup4_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Small Text"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@mipmap/list_devider"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_setup4_admin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="开启管理员权限"/>
+
+        <TextView
+            android:layout_marginLeft="20dp"
+            android:id="@+id/tv_setup4_admin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="管理员权限未开启"/>
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@android:drawable/presence_invisible"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@android:drawable/presence_invisible"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@android:drawable/presence_invisible"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@android:drawable/presence_online"/>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/phone"
+            android:layout_centerInParent="true"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="next"
+            android:drawableRight="@mipmap/next"
+            android:background="@drawable/btn_green_normal"
+            android:text="设置完成"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="pre"
+            android:drawableLeft="@mipmap/previous"
+            android:background="@drawable/btn_green_normal"
+            android:text="上一步"
+            android:layout_alignParentBottom="true"/>
+    </RelativeLayout>
+
+</LinearLayout>
