@@ -1,6 +1,7 @@
 package yyg.buaa.com.yygsafe.adapter;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,6 +49,12 @@ public class HomeAdapter extends BaseAdapter {
         //设置布局中控件要显示的视图
         holder.iv.setBackgroundResource(resourceId[position]);
         holder.tv.setText(name[position]);
+        if (position == 0) {
+            String newname = context.getSharedPreferences("config", Context.MODE_PRIVATE).getString("newname", "");
+            if (!TextUtils.isEmpty(newname)) {
+                holder.tv.setText(newname);
+            }
+        }
         return convertView;
     }
 
