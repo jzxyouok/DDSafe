@@ -43,6 +43,7 @@ public class HomeActivity extends BaseActivity {
 
     @Override
     public void initData() {
+
         //条目点击事件
         grid_home.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -66,8 +67,9 @@ public class HomeActivity extends BaseActivity {
 
     @Override
     protected void onStart() {
-        grid_home.setAdapter(new HomeAdapter(HomeActivity.this, names, icons));
         super.onStart();
+        adapter = new HomeAdapter(HomeActivity.this, names, icons);
+        grid_home.setAdapter(adapter);
     }
 
     private boolean isSetPwd() {

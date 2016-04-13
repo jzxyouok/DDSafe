@@ -1,6 +1,7 @@
 package yyg.buaa.com.yygsafe.adapter;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,7 +51,8 @@ public class HomeAdapter extends BaseAdapter {
         holder.iv.setBackgroundResource(resourceId[position]);
         holder.tv.setText(name[position]);
         if (position == 0) {
-            String newname = context.getSharedPreferences("config", Context.MODE_PRIVATE).getString("newname", "");
+            SharedPreferences sp = context.getSharedPreferences("config", Context.MODE_PRIVATE);
+            String newname = sp.getString("newname", "");
             if (!TextUtils.isEmpty(newname)) {
                 holder.tv.setText(newname);
             }
