@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import yyg.buaa.com.yygsafe.R;
 import yyg.buaa.com.yygsafe.activity.base.BaseActivity;
-import yyg.buaa.com.yygsafe.utils.UIUtils;
 
 /**
  * Created by yyg on 2016/4/8.
@@ -52,34 +51,25 @@ public class LostFindActivity extends BaseActivity {
         }
     }
 
-    /**
-     * menu菜单创建时调用
-     * @param menu
-     * @return
-     */
+    //menu创建时调用
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.lost_find_menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
-    /**
-     * 当menu条目被点击时调用
-     * @param item
-     * @return
-     */
+    //menu条目被选中时触发
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (R.id.menu_change_name == item.getItemId()) {
+        if (R.id.item_change_name == item.getItemId()) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("请输入要修改的名字");
+            builder.setTitle("设置手机防盗的新名称");
             final EditText et = new EditText(this);
             builder.setView(et);
             builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     sp.edit().putString("newname", et.getText().toString().trim()).commit();
-                    UIUtils.showToast(LostFindActivity.this, "名称修改完成");
                 }
             });
             builder.show();
@@ -87,16 +77,7 @@ public class LostFindActivity extends BaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * menu菜单被点击时调用
-     * @param featureId
-     * @param menu
-     * @return
-     */
-    @Override
-    public boolean onMenuOpened(int featureId, Menu menu) {
-        return super.onMenuOpened(featureId, menu);
-    }
+
 
     @Override
     public void initData() {

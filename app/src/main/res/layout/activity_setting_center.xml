@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:custom="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <TextView
+        style="@style/textview_title_style"
+        android:text="设置中心"/>
+
+    <yyg.buaa.com.yygsafe.ui.MySettingView
+        android:id="@+id/sv_autoupdate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        custom:mytitle="自动更新设置"
+        custom:mydesc="自动更新已开启#自动更新已关闭"/>
+
+    <yyg.buaa.com.yygsafe.ui.MySettingView
+        android:id="@+id/sv_blacknumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        custom:mytitle="黑名单设置"
+        custom:mydesc="黑名单拦截已经打开#黑名单拦截已经关闭"/>
+
+    <yyg.buaa.com.yygsafe.ui.MySettingView
+        android:id="@+id/sv_showaddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        custom:mytitle="来电归属地设置"
+        custom:mydesc="来电归属地显示已经打开#来电归属地显示已经关闭"/>
+</LinearLayout>

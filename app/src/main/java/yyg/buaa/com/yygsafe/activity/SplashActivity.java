@@ -106,7 +106,21 @@ public class SplashActivity extends BaseActivity {
         rl_splash_root.startAnimation(aa);
 
         //检查版本
-        checkVersion();
+        if (sp.getBoolean("autoupdate", false)) {
+            checkVersion();
+        } else {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        Thread.sleep(1000);
+                        startActivityAndFinishSelf(HomeActivity.class);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }).start();
+        }
     }
 
     @Override
