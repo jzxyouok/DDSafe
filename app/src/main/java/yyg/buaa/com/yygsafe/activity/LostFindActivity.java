@@ -1,7 +1,12 @@
 package yyg.buaa.com.yygsafe.activity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -45,6 +50,34 @@ public class LostFindActivity extends BaseActivity {
             startActivityAndFinishSelf(Setup1Activity.class);
         }
     }
+
+    //menu创建时调用
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.lost_find_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    //menu条目被选中时触发
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (R.id.item_change_name == item.getItemId()) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("设置手机防盗的新名称");
+            final EditText et = new EditText(this);
+            builder.setView(et);
+            builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    sp.edit().putString("newname", et.getText().toString().trim()).commit();
+                }
+            });
+            builder.show();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+
 
     @Override
     public void initData() {

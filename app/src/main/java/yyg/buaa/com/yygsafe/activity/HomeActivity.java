@@ -43,9 +43,6 @@ public class HomeActivity extends BaseActivity {
 
     @Override
     public void initData() {
-        adapter = new HomeAdapter(HomeActivity.this, names, icons);
-        grid_home.setAdapter(adapter);
-
         //条目点击事件
         grid_home.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -60,11 +57,20 @@ public class HomeActivity extends BaseActivity {
                             //已经设置过密码，显示确认密码对话框
                             showConfirmPwdDialog();
                         }
-
-
+                        break;
+                    case 8: //设置中心
+                        startActivity(SettingCenterActivity.class);
+                        break;
                 }
             }
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        grid_home.setAdapter(new HomeAdapter(HomeActivity.this, names, icons));
+
     }
 
     private boolean isSetPwd() {

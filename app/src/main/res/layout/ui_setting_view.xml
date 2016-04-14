@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="自动更新设置"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        android:textSize="22sp"
+        android:textColor="#000000"
+        android:id="@+id/tv_settingview_title"
+        android:layout_alignParentTop="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="自动更新未开启"
+        android:textSize="18sp"
+        android:layout_marginTop="3dp"
+        android:layout_marginLeft="5dp"
+        android:id="@+id/tv_settingview_desc"
+        android:layout_below="@+id/tv_settingview_title"
+        />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@mipmap/list_devider"
+        android:layout_below="@id/tv_settingview_desc"
+        android:layout_marginTop="2dp"/>
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cb_settingview"
+        android:background="@android:color/transparent"
+        android:clickable="false"
+        android:focusable="false"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"/>
+</RelativeLayout>

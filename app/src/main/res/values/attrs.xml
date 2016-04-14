@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="MySettingView">
+        <attr name="mytitle" format="string"/>
+        <attr name="mydesc" format="string"/>
+    </declare-styleable>
+</resources>
