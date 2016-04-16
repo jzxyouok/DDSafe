@@ -85,6 +85,4 @@ public class MySettingView extends RelativeLayout {
             tv_settingview_desc.setText(descs[1]);
         }
     }
-
-
 }

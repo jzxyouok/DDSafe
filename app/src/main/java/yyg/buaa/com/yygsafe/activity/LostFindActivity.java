@@ -61,7 +61,7 @@ public class LostFindActivity extends BaseActivity {
     //menu条目被选中时触发
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (R.id.item_change_name == item.getItemId()) {
+        if (R.id.menu_change_name == item.getItemId()) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle("设置手机防盗的新名称");
             final EditText et = new EditText(this);
