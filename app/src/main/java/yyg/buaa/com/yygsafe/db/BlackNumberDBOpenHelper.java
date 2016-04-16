@@ -19,7 +19,7 @@ public class BlackNumberDBOpenHelper extends SQLiteOpenHelper{
     public void onCreate(SQLiteDatabase db) {
          db.execSQL("create table" + Constant.BlackNumber.TABLE +
                     "(_id integer primary key autoincrement, " +
-                    "number verchar(20), " +
+                    "number varchar(20), " +
                     "mode varchar(2) )");
     }
 
