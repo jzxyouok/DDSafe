@@ -15,7 +15,6 @@ import yyg.buaa.com.yygsafe.domain.BlackNumberInfo;
 public class TestBlackNumberDao extends ActivityTestCase{
 
 
-
     @Test
     public void testAdd() {
         BlackNumberDAO dao = new BlackNumberDAO(getInstrumentation().getContext() );

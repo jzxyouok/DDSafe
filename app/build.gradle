@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "24.0.0 rc2"
+    buildToolsVersion '23.0.3'
 
     defaultConfig {
         applicationId "yyg.buaa.com.yygsafe"
@@ -31,5 +31,5 @@ dependencies {
     compile 'org.xutils:xutils:3.3.32'
     compile 'com.orhanobut:logger:1.8'
     testCompile 'junit:junit:4.12'
-    testCompile "org.mockito:mockito-core:1.9.5"
+    testCompile 'org.mockito:mockito-core:1.9.5'
 }
