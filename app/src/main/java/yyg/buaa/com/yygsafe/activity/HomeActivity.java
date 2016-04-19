@@ -58,6 +58,9 @@ public class HomeActivity extends BaseActivity {
                             showConfirmPwdDialog();
                         }
                         break;
+                    case 1: //通讯卫士
+                        startActivity(CallSmsSafeActivity.class);
+                        break;
                     case 8: //设置中心
                         startActivity(SettingCenterActivity.class);
                         break;
@@ -70,7 +73,6 @@ public class HomeActivity extends BaseActivity {
     protected void onStart() {
         super.onStart();
         grid_home.setAdapter(new HomeAdapter(HomeActivity.this, names, icons));
-
     }
 
     private boolean isSetPwd() {

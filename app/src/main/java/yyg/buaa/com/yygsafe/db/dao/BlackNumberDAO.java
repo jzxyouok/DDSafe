@@ -4,7 +4,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.os.SystemClock;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -109,7 +108,65 @@ public class BlackNumberDAO {
         }
         cursor.close();
         db.close();
-        SystemClock.sleep(3000);
         return infoList;
+    }
+
+    /**
+     * 数据库分批加载
+     * @param startIndex 从哪个位置开始加载数据
+     * @param maxCount 最多加载几条数据
+     * @return
+     */
+    public List<BlackNumberInfo> queryPart(int startIndex, int maxCount) {
+        SQLiteDatabase db = helper.getReadableDatabase();
+        Cursor cursor = db.rawQuery("select number,mode from " + Constant.BlackNumber.TABLE + " order by _id desc limit ? offset ?",
+                new String[]{String.valueOf(maxCount), String.valueOf(startIndex)});
+        List<BlackNumberInfo> infoList = new ArrayList<BlackNumberInfo>();
+        while (cursor.moveToNext()) {
+            BlackNumberInfo info = new BlackNumberInfo();
+            info.setNumber(cursor.getString(cursor.getColumnIndex("number")));
+            info.setMode(cursor.getString(cursor.getColumnIndex("mode")));
+            infoList.add(info);
+        }
+        cursor.close();
+        db.close();
+        return infoList;
+    }
+
+    /**
+     * 数据库分页加载
+     * @param pagenumber 第几页，页码从第0页开始
+     * @param pagesize 每一个页面的大小
+     * @return
+     */
+    public List<BlackNumberInfo> queryPart2(int pagenumber, int pagesize) {
+        SQLiteDatabase db = helper.getReadableDatabase();
+        Cursor cursor = db.rawQuery("select number, mode from " + Constant.BlackNumber.TABLE + "order by _id desc limit ? offset ?",
+                new String[]{String.valueOf(pagesize), String.valueOf(pagesize * pagenumber)});
+        List<BlackNumberInfo> infoList = new ArrayList<BlackNumberInfo>();
+        while (cursor.moveToNext()) {
+            BlackNumberInfo info = new BlackNumberInfo();
+            info.setNumber(cursor.getString(cursor.getColumnIndex("number")));
+            info.setMode(cursor.getString(cursor.getColumnIndex("mode")));
+            infoList.add(info);
+        }
+        cursor.close();
+        db.close();
+        return infoList;
+    }
+
+    /**
+     * 获取数据库的总条目个数
+     * @return
+     */
+    public int getTotalNumber() {
+        //得到可读的数据库
+        SQLiteDatabase db = helper.getReadableDatabase();
+        Cursor cursor = db.rawQuery("select count(*) from " + Constant.BlackNumber.TABLE, null);
+        cursor.moveToNext();
+        int count = cursor.getInt(0);
+        cursor.close();
+        db.close();
+        return count;
     }
 }

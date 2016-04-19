@@ -14,10 +14,14 @@ import yyg.buaa.com.yygsafe.domain.BlackNumberInfo;
  */
 public class TestBlackNumberDao extends ActivityTestCase{
 
-
     @Test
     public void testAdd() {
         BlackNumberDAO dao = new BlackNumberDAO(getInstrumentation().getContext() );
+//        Random random = new Random(3121);
+//        for (int i = 0; i < 200; i++) {
+//            long number = 133212123 + i;
+//            dao.insertDao(number + "", String.valueOf(random.nextInt(3) + 1));
+//        }
         boolean result = dao.insertDao("1888", "2");
         assertEquals(true, result);
     }
