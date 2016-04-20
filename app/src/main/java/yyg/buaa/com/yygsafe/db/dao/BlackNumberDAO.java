@@ -141,7 +141,7 @@ public class BlackNumberDAO {
      */
     public List<BlackNumberInfo> queryPart2(int pagenumber, int pagesize) {
         SQLiteDatabase db = helper.getReadableDatabase();
-        Cursor cursor = db.rawQuery("select number, mode from " + Constant.BlackNumber.TABLE + "order by _id desc limit ? offset ?",
+        Cursor cursor = db.rawQuery("select number, mode from " + Constant.BlackNumber.TABLE + " order by _id desc limit ? offset ?",
                 new String[]{String.valueOf(pagesize), String.valueOf(pagesize * pagenumber)});
         List<BlackNumberInfo> infoList = new ArrayList<BlackNumberInfo>();
         while (cursor.moveToNext()) {

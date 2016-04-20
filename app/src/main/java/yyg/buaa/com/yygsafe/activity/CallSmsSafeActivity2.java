@@ -10,7 +10,6 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
@@ -18,6 +17,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import yyg.buaa.com.yygsafe.R;
 import yyg.buaa.com.yygsafe.activity.base.BaseActivity;
+import yyg.buaa.com.yygsafe.adapter.CallSmsSafeAdapter;
 import yyg.buaa.com.yygsafe.db.dao.BlackNumberDAO;
 import yyg.buaa.com.yygsafe.domain.BlackNumberInfo;
 import yyg.buaa.com.yygsafe.utils.UIUtils;
@@ -48,6 +48,8 @@ public class CallSmsSafeActivity2 extends BaseActivity {
     private static final int pageSize = 20;
     private int currentPageNumber = 0;
     private int totalPage = 0;
+    private BlackNumberDAO dao;
+    private CallSmsSafeAdapter adapter;
 
     private Handler handler = new Handler() {
 
@@ -57,17 +59,13 @@ public class CallSmsSafeActivity2 extends BaseActivity {
             if (list.size() == 0) {
                 llAddNumberTips.setVisibility(View.VISIBLE);
             } else {
-                if (adapter == null) {
-                    adapter = new CallSmsSafeAdapter(CallSmsSafeActivity2.this, list);
-                    lvCallsmsSafe.setAdapter(adapter);
-                } else {
-                    adapter.notifyDataSetChanged();
-                }
+                llAddNumberTips.setVisibility(View.INVISIBLE);
+                //因为list是重新赋值，已经不是原来的list了，所以要重新new adapter
+                adapter = new CallSmsSafeAdapter(CallSmsSafeActivity2.this, list, dao);
+                lvCallsmsSafe.setAdapter(adapter);
             }
         }
     };
-    private BlackNumberDAO dao;
-    private CallSmsSafeAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,8 +77,8 @@ public class CallSmsSafeActivity2 extends BaseActivity {
     @Override
     public void initData() {
         dao = new BlackNumberDAO(this);
-        totalPage = dao.getTotalNumber();
-        tvPageInfo.setText(currentPageNumber + "/" + totalPage);
+        totalPage = dao.getTotalNumber() / pageSize;
+        tvPageInfo.setText(currentPageNumber + "/" + totalPage );
         llLoading.setVisibility(View.VISIBLE);
         new Thread(new Runnable() {
             @Override

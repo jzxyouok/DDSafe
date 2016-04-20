@@ -1,10 +1,12 @@
 package yyg.buaa.com.yygsafe.activity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.view.View;
 
 import yyg.buaa.com.yygsafe.R;
 import yyg.buaa.com.yygsafe.activity.base.BaseActivity;
+import yyg.buaa.com.yygsafe.service.CallSmsSafeService;
 import yyg.buaa.com.yygsafe.ui.MySettingView;
 
 /**
@@ -15,6 +17,7 @@ public class SettingCenterActivity extends BaseActivity {
     private MySettingView sv_autoupdate;
     private MySettingView sv_blacknumber;
     private MySettingView sv_showaddress;
+    private Intent intent;
 
     @Override
     public void initView() {
@@ -30,6 +33,8 @@ public class SettingCenterActivity extends BaseActivity {
         sv_autoupdate.setChecked(sp.getBoolean("autoupdate", false));
         sv_blacknumber.setChecked(sp.getBoolean("blacknumber", false));
         sv_showaddress.setChecked(sp.getBoolean("showaddress", false));
+
+        intent = new Intent(this, CallSmsSafeService.class);
     }
 
     @Override
@@ -47,11 +52,23 @@ public class SettingCenterActivity extends BaseActivity {
                 setCheckedAndSp(sv_autoupdate, "autoupdate");
                 break;
             case R.id.sv_blacknumber:
-                setCheckedAndSp(sv_blacknumber, "blacknumber");
+                blackNumberSetting();
                 break;
             case R.id.sv_showaddress:
                 setCheckedAndSp(sv_showaddress, "showaddress");
 
+        }
+    }
+
+    private void blackNumberSetting() {
+        if (sv_blacknumber.isChecked()) {
+            //已选中，点击未选中
+            sv_blacknumber.setChecked(false);
+            stopService(intent);
+        } else {
+            //未选中，点击已选中,开启服务
+            sv_blacknumber.setChecked(true);
+            startService(intent);
         }
     }
 
