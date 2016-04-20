@@ -3,10 +3,14 @@ package yyg.buaa.com.yygsafe.activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -14,9 +18,9 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import yyg.buaa.com.yygsafe.R;
 import yyg.buaa.com.yygsafe.activity.base.BaseActivity;
-import yyg.buaa.com.yygsafe.adapter.CallSmsSafeAdapter;
 import yyg.buaa.com.yygsafe.db.dao.BlackNumberDAO;
 import yyg.buaa.com.yygsafe.domain.BlackNumberInfo;
+import yyg.buaa.com.yygsafe.utils.UIUtils;
 
 /**
  * 实现数据分页显示
@@ -24,45 +28,64 @@ import yyg.buaa.com.yygsafe.domain.BlackNumberInfo;
  */
 public class CallSmsSafeActivity2 extends BaseActivity {
 
-    @Bind(R.id.button1)
-    Button button1;
     @Bind(R.id.ll_add_number_tips)
     LinearLayout llAddNumberTips;
     @Bind(R.id.ll_loading)
     LinearLayout llLoading;
     @Bind(R.id.lv_callsms_safe)
     ListView lvCallsmsSafe;
+    @Bind(R.id.prePage)
+    Button prePage;
+    @Bind(R.id.nextPage)
+    Button nextPage;
+    @Bind(R.id.jump)
+    Button jump;
+    @Bind(R.id.et_page_number)
+    EditText etPageNumber;
+    @Bind(R.id.tv_page_info)
+    TextView tvPageInfo;
     private List<BlackNumberInfo> list;
+    private static final int pageSize = 20;
+    private int currentPageNumber = 0;
+    private int totalPage = 0;
 
     private Handler handler = new Handler() {
+
         @Override
         public void handleMessage(Message msg) {
             llLoading.setVisibility(View.INVISIBLE);
             if (list.size() == 0) {
                 llAddNumberTips.setVisibility(View.VISIBLE);
             } else {
-                // TODO: 2016/4/19 改为查询部分
-                CallSmsSafeAdapter adapter = new CallSmsSafeAdapter(CallSmsSafeActivity2.this, list);
-                lvCallsmsSafe.setAdapter(adapter);
+                if (adapter == null) {
+                    adapter = new CallSmsSafeAdapter(CallSmsSafeActivity2.this, list);
+                    lvCallsmsSafe.setAdapter(adapter);
+                } else {
+                    adapter.notifyDataSetChanged();
+                }
             }
         }
     };
+    private BlackNumberDAO dao;
+    private CallSmsSafeAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setContentView(R.layout.activity_callsms_safe);
+        setContentView(R.layout.activity_callsms_safe2);
         ButterKnife.bind(this);
         super.onCreate(savedInstanceState);     //必须先setContentView，不然会报空指针
     }
 
     @Override
     public void initData() {
-        final BlackNumberDAO dao = new BlackNumberDAO(this);
+        dao = new BlackNumberDAO(this);
+        totalPage = dao.getTotalNumber();
+        tvPageInfo.setText(currentPageNumber + "/" + totalPage);
         llLoading.setVisibility(View.VISIBLE);
         new Thread(new Runnable() {
             @Override
             public void run() {
-                list = dao.queryAll();
+                list = dao.queryPart2(currentPageNumber, pageSize);
                 handler.sendEmptyMessage(0);
             }
         }).start();
@@ -71,12 +94,45 @@ public class CallSmsSafeActivity2 extends BaseActivity {
 
     @Override
     public void initListener() {
-
+        prePage.setOnClickListener(this);
+        nextPage.setOnClickListener(this);
+        jump.setOnClickListener(this);
     }
 
     @Override
     public void progressClick(View v) {
-
+        switch (v.getId()) {
+            case R.id.prePage:
+                if (currentPageNumber <= 0) {
+                    UIUtils.showToast(this, "已经是第一页");
+                    return;
+                }
+                currentPageNumber--;
+                initData();
+                break;
+            case R.id.nextPage:
+                if (currentPageNumber > (totalPage - 1)) {
+                    UIUtils.showToast(this, "已经是最后一页");
+                    return;
+                }
+                currentPageNumber++;
+                initData();
+                break;
+            case R.id.jump:
+                String str_pagenumber = etPageNumber.getText().toString().trim();
+                if(TextUtils.isEmpty(str_pagenumber)){
+                    UIUtils.showToast(this, "页码不能为空");
+                }else{
+                    int number = Integer.parseInt(str_pagenumber);
+                    if(number>=0&&number<totalPage){
+                        currentPageNumber = number;
+                        initData();
+                    }else{
+                        UIUtils.showToast(this, "打开失败");
+                    }
+                }
+                break;
+        }
     }
 
     @Override

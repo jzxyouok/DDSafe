@@ -65,19 +65,19 @@
         android:orientation="horizontal" >
 
         <Button
-            android:onClick="prePage"
+            android:id="@+id/prePage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="上一页" />
 
         <Button
-            android:onClick="nextPage"
+            android:id="@+id/nextPage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="下一页" />
 
         <Button
-            android:onClick="jump"
+            android:id="@+id/jump"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="跳转" />
